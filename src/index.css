@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+#entrance {
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+}
+
+#signup, #login{
+    backface-visibility: hidden;
+}
+#login{
+    transform: perspective(500px) rotateY(180deg);
+}
