@@ -7,6 +7,9 @@ import Footer from "./components/Footer";
 import Error from "./Pages/Error";
 import Users from "./Pages/Users";
 import Profile from "./Pages/Profile";
+import Posts from "./Pages/Posts";
+import Settings from "./Pages/Settings";
+import ProfileInfo from "./Pages/ProfileInfo";
 
 function App() {
   const [login, setLogin] = useState(localStorage.getItem("userData"));
@@ -27,12 +30,16 @@ function App() {
                 </div>
               }
             >
-              <Route index element={<Home ApiKey={ApiKey}/>} />
+              <Route index element={<Home ApiKey={ApiKey} />} />
               <Route path="/home" element={<Home />} />
-              <Route path="/users" element={<Users ApiKey={ApiKey}/>} />
-              <Route path="/profile" element={<Profile/>} />
+              <Route path="/users" element={<Users ApiKey={ApiKey} />} />
+              <Route path="/profile" element={<Profile ApiKey={ApiKey} />}>
+                <Route path="/profile/" element={<ProfileInfo/>} />
+                <Route path="/profile/posts" element={<Posts ApiKey={ApiKey}/>} />
+                <Route path="/profile/settings" element={<Settings />} />
+              </Route>
             </Route>
-            <Route path="*" element={<Error/>} />
+            <Route path="*" element={<Error />} />
           </Routes>
         </>
       ) : (

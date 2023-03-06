@@ -2,9 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const Signup = ({ round, setRound ,ApiKey,setLogin}) => {
+const Signup = ({ round, setRound, ApiKey, setLogin }) => {
   const [formData, setFormData] = useState({});
-
 
   const postUser = async () => {
     const { fsname, smail, spassword } = formData;
@@ -14,7 +13,10 @@ const Signup = ({ round, setRound ,ApiKey,setLogin}) => {
         userName: fsname,
         email: smail,
         password: spassword,
-        profileImage: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'
+        profileImage:
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
+        about:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Prointurpis orci, maximus sed purus a, cursus scelerisque purus.Morbi molestie, odio at sagittis rhoncus, felis massa iaculismi, quis molestie erat ipsum vel risus.",
       }
       //todo enson ne zaman gırıs ekle hesap ne zaman acıldı ekle
     );
@@ -27,7 +29,9 @@ const Signup = ({ round, setRound ,ApiKey,setLogin}) => {
       `https://63f2206c4f17278c9a20b961.mockapi.io` + "/" + ApiKey
     );
     const data = res.data;
-    const userChek = data.filter(u=> u.email === formData.smail || u.userName === formData.fsname)
+    const userChek = data.filter(
+      (u) => u.email === formData.smail || u.userName === formData.fsname
+    );
     if (userChek.length > 0) {
       const Toast = Swal.mixin({
         toast: true,
@@ -45,37 +49,36 @@ const Signup = ({ round, setRound ,ApiKey,setLogin}) => {
         title: "Kulanici Mevcut",
       });
     } else {
-        const Toast = Swal.mixin({
-          toast: true,
-          position: "top-end",
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-            toast.addEventListener("mouseenter", Swal.stopTimer);
-            toast.addEventListener("mouseleave", Swal.resumeTimer);
-          },
-        });
-        Toast.fire({
-          icon: "success",
-          title: "Kayit Başarili",
-        });
-        await postUser();
-        await setUser()
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Kayit Başarili",
+      });
+      await postUser();
+      await setUser();
     }
     event.target.reset();
   };
 
-  const setUser = async() =>{
+  const setUser = async () => {
     const res = await axios(
       `https://63f2206c4f17278c9a20b961.mockapi.io` + "/" + ApiKey
     );
-    let data = res.data
-    let userData = data.filter(u => u.email === formData.smail)
-    localStorage.setItem('userData',JSON.stringify(userData[0]))
-    setLogin(true)
-  }
-
+    let data = res.data;
+    let userData = data.filter((u) => u.email === formData.smail);
+    localStorage.setItem("userData", JSON.stringify(userData[0]));
+    setLogin(true);
+  };
 
   const handleInputChange = (event) => {
     setFormData({

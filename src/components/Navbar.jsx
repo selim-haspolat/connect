@@ -12,7 +12,7 @@ const Navbar = ({}) => {
   return (
     <div className="bg-transparent backdrop-brightness-125 backdrop-lg shadow-md  p-5">
       <div className="container mx-auto flex justify-between items-center drop-shadow-xl tracking-wider">
-        <div className="text-3xl font-light uppercase text-white tracking-widest">connect</div>
+        <Link to='/' className="text-3xl font-light uppercase text-white tracking-widest select-none cursor-pointer">connect</Link>
         <ul className="flex items-center gap-10 text-white">
           <li>
             <Link to="/">Home</Link>

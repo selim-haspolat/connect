@@ -3,7 +3,7 @@ import React from "react";
 const PostCard = ({ postCreator, postCreatorImage,text  }) => {
 
   return (
-      <div className="w-full bg-slate-700 px-5 pt-9 pb-3 rounded-lg text-white relative">
+      <div className="w-full bg-slate-700 px-5 pt-9 pb-3 rounded-lg text-white relative break-words">
         <img
           src={postCreatorImage}
           className="w-16 h-16 rounded-full absolute -top-2.5 left-5"
