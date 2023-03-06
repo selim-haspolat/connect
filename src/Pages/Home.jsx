@@ -12,7 +12,11 @@ const Main = ({ ApiKey }) => {
     const { data } = await axios(
       `https://63f2206c4f17278c9a20b961.mockapi.io/${ApiKey}`
     );
-    setUserPostData(data);
+
+    let allPosts = data.map((u) => u.posts).flat(1).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    setUserPostData(allPosts);
+
     setLoadPosts(false);
   };
 
@@ -32,19 +36,13 @@ const Main = ({ ApiKey }) => {
       <div className="container flex flex-col gap-5 mx-auto p-5">
         {loadPosts
           ? tenArr.map((a) => <LoadPostCard key={a} />)
-          : userPostData.map((user) =>
-              user.posts.map((p) => (
-                <PostCard
+          : userPostData.map(p => <PostCard
                   key={p.postId}
-                  user={user.userName}
-                  image={user.profileImage}
-                  post={p}
-                />
-              ))
-            )}
+                  {...p}
+                />)}
       </div>
     </div>
   );
-};
+};    
 
 export default Main;

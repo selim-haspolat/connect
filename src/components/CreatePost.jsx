@@ -7,7 +7,7 @@ const CreatePost = ({ ApiKey,displayPosts,setDisplayPosts }) => {
   const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
   const addPost = async (text) => {
-    const { id } = JSON.parse(localStorage.getItem("userData"));
+    const { id,userName,profileImage } = JSON.parse(localStorage.getItem("userData"));
 
     const { data } = await axios(
       `https://63f2206c4f17278c9a20b961.mockapi.io/${ApiKey}/${id}`
@@ -21,8 +21,10 @@ const CreatePost = ({ ApiKey,displayPosts,setDisplayPosts }) => {
         posts: [
           ...posts,
           {
+            postCreator: userName,
+            postCreatorImage: profileImage,
             text,
-            createdAt: new Date(),
+            createdAt: new Date().toISOString(),
             postId: numbers.reduce(
               (acc) => acc + numbers[Math.floor(Math.random() * 10)]
             ),
