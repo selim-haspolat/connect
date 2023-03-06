@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 const Settings = ({ ApiKey }) => {
   const localData = JSON.parse(localStorage.getItem("userData"));
-  const { userName, email, profileImage, about,id } = localData
+  const { userName, email, profileImage, about, id } = localData;
   const [formData, setFormData] = useState({
     userName: userName,
     email: email,
@@ -11,16 +12,60 @@ const Settings = ({ ApiKey }) => {
     about: about,
   });
 
-  const pushChanges = async() => {
-    await axios.put(`https://63f2206c4f17278c9a20b961.mockapi.io/${ApiKey}/${id}`,formData)
-  }
-
-  const changeUserData = (e) => {
-    e.preventDefault();
-    localStorage.setItem("userData", JSON.stringify({...localData,...formData}));
-    pushChanges()
+  const pushChanges = async () => {
+    await axios.put(
+      `https://63f2206c4f17278c9a20b961.mockapi.io/${ApiKey}/${id}`,
+      formData
+    );
   };
 
+  const changeUserData = async (e) => {
+    e.preventDefault();
+    const { data } = await axios(
+      `https://63f2206c4f17278c9a20b961.mockapi.io/${ApiKey}`
+    );
+    const userChek = data.filter(u => u.userName === formData.userName)
+    const emailChek = data.filter(u => u.email === formData.email)
+    if(userChek.length !== 1 || emailChek.length !== 1){
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({ ...localData, ...formData })
+      );
+      pushChanges();
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Changes Saved",
+      });
+    }
+    else{
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+      Toast.fire({
+        icon: "error",
+        title: "User Exists",
+      });
+    }
+  };
 
   return (
     <form

@@ -4,10 +4,6 @@ import { Link, Outlet } from "react-router-dom";
 
 const Profile = ({ ApiKey }) => {
 
-  
-  console.log(new Date().toLocaleDateString());
-  console.log(new Date().toLocaleTimeString());
-
   return (
     <div>
       <nav className="z-20 flex shrink-0 grow-0 justify-around gap-4 border-t  p-2.5 shadow-lg backdrop-blur-lg border-slate-600/60 bg-slate-900/50 fixed top-2/4 -translate-y-2/4 left-6 min-h-[auto] min-w-[64px] flex-col rounded-lg border">
