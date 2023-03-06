@@ -17,7 +17,7 @@ function App() {
   const ApiKey = process.env.REACT_APP_API_KEY;
 
   return (
-    <div>
+    <div className="bg-slate-900">
       {login ? (
         <>
           <Routes>

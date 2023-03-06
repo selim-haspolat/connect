@@ -25,12 +25,13 @@ input::-webkit-inner-spin-button {
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
+  background: rgb(100,116,139);
 
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #334155;
+  background: rgb(100,116,139);
   border-radius: 20px;
 }
 
@@ -42,5 +43,5 @@ input::-webkit-inner-spin-button {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(82, 82, 82);
+  background: rgb(15, 23, 42);
 }
