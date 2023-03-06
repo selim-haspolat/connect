@@ -17,8 +17,8 @@ const Signup = ({ round, setRound, ApiKey, setLogin }) => {
           "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
         about:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Prointurpis orci, maximus sed purus a, cursus scelerisque purus.Morbi molestie, odio at sagittis rhoncus, felis massa iaculismi, quis molestie erat ipsum vel risus.",
+        accountCreatedAt: `${new Date().toLocaleDateString()}  ${new Date().toLocaleTimeString()}`,
       }
-      //todo enson ne zaman gırıs ekle hesap ne zaman acıldı ekle
     );
   };
 

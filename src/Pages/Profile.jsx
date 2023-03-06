@@ -4,6 +4,10 @@ import { Link, Outlet } from "react-router-dom";
 
 const Profile = ({ ApiKey }) => {
 
+  
+  console.log(new Date().toLocaleDateString());
+  console.log(new Date().toLocaleTimeString());
+
   return (
     <div>
       <nav className="z-20 flex shrink-0 grow-0 justify-around gap-4 border-t  p-2.5 shadow-lg backdrop-blur-lg border-slate-600/60 bg-slate-900/50 fixed top-2/4 -translate-y-2/4 left-6 min-h-[auto] min-w-[64px] flex-col rounded-lg border">
@@ -95,11 +99,11 @@ const Profile = ({ ApiKey }) => {
               d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819"
             />
           </svg>
-          <small classname="text-xs font-medium">Home</small>
+          <small className="text-xs font-medium">Home</small>
         </Link>
       </nav>
       <div className="flex items-center h-[calc(100vh-145px)] text-white bg-gray-600">
-        <div className="ml-32 w-[80%] flex justify-center ">
+        <div className="ml-32 w-[100%] flex justify-center">
           <Outlet />
         </div>
       </div>

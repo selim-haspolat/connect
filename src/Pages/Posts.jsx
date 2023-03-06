@@ -21,9 +21,10 @@ const Posts = ({ApiKey}) => {
   }, [])
   
   return (
-  <div className="w-[100%] max-h-[550px] py-5 overflow-auto mr-auto flex flex-col-reverse gap-4">
+  <div className="w-[95%] max-h-[550px] py-5 overflow-auto 
+   flex flex-col-reverse gap-4">
     {
-      posts.map(p => <MyPostsCard key={p.postId} {...p} deletePost={deletePost}/>)
+      posts.length ? posts.map(p => <MyPostsCard key={p.postId} {...p} deletePost={deletePost}/>) : <div className="mx-auto">No Post Yet</div>
     }
   </div>
   );

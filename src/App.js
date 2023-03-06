@@ -36,7 +36,7 @@ function App() {
               <Route path="/profile" element={<Profile ApiKey={ApiKey} />}>
                 <Route path="/profile/" element={<ProfileInfo/>} />
                 <Route path="/profile/posts" element={<Posts ApiKey={ApiKey}/>} />
-                <Route path="/profile/settings" element={<Settings />} />
+                <Route path="/profile/settings" element={<Settings ApiKey={ApiKey}/>} />
               </Route>
             </Route>
             <Route path="*" element={<Error />} />
