@@ -6,7 +6,7 @@ const ProfileInfo = () => {
     );
     const handleLogOut = () => {
       localStorage.removeItem('userData')
-      location.reload()
+      // location.reload()
     }
   return (
     <div className="flex flex-col gap-5">
