@@ -24,6 +24,7 @@ const CreatePost = ({ ApiKey, displayPosts, setDisplayPosts }) => {
           ...posts,
           {
             postCreator: userName,
+            idCreator: id,
             postCreatorImage: profileImage,
             text,
             createdAt: new Date().toISOString(),

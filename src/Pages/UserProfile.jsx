@@ -1,36 +1,51 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-const ProfileInfo = () => {
-  const { userName, email, profileImage, about } = JSON.parse(
-    localStorage.getItem("userData")
+const UserProfile = ({ ApiKey }) => {
+  const [userCardData, setUserCardData] = useState({});
+  const { id } = useParams();
+
+  const findUser = async () => {
+    const { data } = await axios(
+      `https://63f2206c4f17278c9a20b961.mockapi.io/${ApiKey}/${id}`
     );
-    const handleLogOut = () => {
-      localStorage.removeItem('userData')
-      window.location.reload()
-    }
+    setUserCardData({
+      userName: data.userName,
+      email: data.email,
+      profileImage: data.profileImage,
+      posts: data.posts,
+      about: data.about,
+    });
+  };
+
+  useEffect(() => {
+    findUser();
+  }, []);
+
   return (
-    <div className="flex flex-col gap-5">
+    <div className="h-[81vh] flex justify-center items-center">
       <div className="relative w-96 group break-words border shadow-2xl bg-slate-800 border-gray-700 rounded-xl">
         <div className="pb-6">
           <div className="flex flex-wrap justify-center">
             <div className="flex justify-center w-full">
               <img
-                src={profileImage}
+                src={userCardData.profileImage}
                 className="w-36 h-36 border-slate-800 rounded-full border-8 absolute -top-20 "
               />
             </div>
           </div>
           <div className=" mt-16 text-center">
             <h3 className="mb-1 text-3xl font-bold leading-normal text-gray-700 dark:text-gray-300">
-              {userName}
+              {userCardData.userName}
             </h3>
-            <h4 className="font-light text-white">{email}</h4>
+            <h4 className="font-light text-white">{userCardData.email}</h4>
           </div>
           <div className="pt-6 mx-6 mt-4 text-center border-t border-gray-200 dark:border-gray-700/50">
             <div className="flex flex-wrap justify-center">
               <div className="w-full px-6">
                 <p className="mb-4 font-light leading-relaxed text-gray-600 dark:text-gray-400">
-                  {about}
+                  {userCardData.about}
                 </p>
               </div>
             </div>
@@ -46,9 +61,8 @@ const ProfileInfo = () => {
           </div>
         </div>
       </div>
-      <button onClick={handleLogOut} className="outline outline-1 outline-red-500 rounded text-red-500 hover:text-white hover:bg-red-500 transition">Log Out</button>
     </div>
   );
 };
 
-export default ProfileInfo;
+export default UserProfile;

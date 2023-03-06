@@ -10,6 +10,7 @@ import Profile from "./Pages/Profile";
 import Posts from "./Pages/Posts";
 import Settings from "./Pages/Settings";
 import ProfileInfo from "./Pages/ProfileInfo";
+import UserProfile from "./Pages/UserProfile";
 
 function App() {
   const [login, setLogin] = useState(localStorage.getItem("userData"));
@@ -33,6 +34,7 @@ function App() {
               <Route index element={<Home ApiKey={ApiKey} />} />
               <Route path="/home" element={<Home />} />
               <Route path="/users" element={<Users ApiKey={ApiKey} />} />
+              <Route path=":id" element={<UserProfile ApiKey={ApiKey}/>} />
               <Route path="/profile" element={<Profile ApiKey={ApiKey} />}>
                 <Route path="/profile/" element={<ProfileInfo/>} />
                 <Route path="/profile/posts" element={<Posts ApiKey={ApiKey}/>} />
