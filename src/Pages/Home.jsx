@@ -29,13 +29,10 @@ const Main = ({ ApiKey }) => {
     try {
       const res = await axios(
         `https://63f2206c4f17278c9a20b961.mockapi.io/${ApiKey}/${id}`
-      );
-      if (res.ok) {
-        throw new Error("Error message");
-      }
+      )
     } catch (error) {
       localStorage.removeItem("userData");
-      window.location.reload();
+      window.location.reload()
     }
   };
   useEffect(() => {
