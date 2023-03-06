@@ -1,15 +1,16 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 
 const Profile = ({ ApiKey }) => {
+  const [sideChange, setSideChange] = useState("profile");
 
   return (
     <div>
       <nav className="z-20 flex shrink-0 grow-0 justify-around gap-4 border-t  p-2.5 shadow-lg backdrop-blur-lg border-slate-600/60 bg-slate-900/50 fixed top-2/4 -translate-y-2/4 left-6 min-h-[auto] min-w-[64px] flex-col rounded-lg border">
         <Link
+          onClick={() => setSideChange("profile")}
           to="/profile"
-          className="flex aspect-square min-h-[32px] w-16 flex-col items-center justify-center gap-1 rounded-md p-1.5 bg-indigo-50 text-indigo-600 dark:bg-sky-900 dark:text-sky-50"
+          className={`flex aspect-square min-h-[32px] w-16 flex-col items-center justify-center gap-1 rounded-md p-1.5  ${sideChange === 'profile' ? 'bg-sky-900 text-sky-50' : 'text-gray-400 hover:bg-slate-800'}`}
         >
           {/* HeroIcon - User */}
           <svg
@@ -29,8 +30,9 @@ const Profile = ({ ApiKey }) => {
           <small className="text-center text-xs font-medium"> Profile </small>
         </Link>
         <Link
+          onClick={() => setSideChange("posts")}
           to="/profile/posts"
-          className="flex aspect-square min-h-[32px] w-16 flex-col items-center justify-center gap-1 rounded-md p-1.5 text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-slate-800"
+          className={`flex aspect-square min-h-[32px] w-16 flex-col items-center justify-center gap-1 rounded-md p-1.5  ${sideChange === 'posts' ? 'bg-sky-900 text-sky-50' : 'text-gray-400 hover:bg-slate-800'}`}
         >
           {/* HeroIcon - Chart Bar */}
           <svg
@@ -50,8 +52,9 @@ const Profile = ({ ApiKey }) => {
           <small className="text-center text-xs font-medium"> Posts </small>
         </Link>
         <Link
+          onClick={() => setSideChange("settings")}
           to="/profile/settings"
-          className="flex aspect-square min-h-[32px] w-16 flex-col items-center justify-center gap-1 rounded-md p-1.5 text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-slate-800"
+          className={`flex aspect-square min-h-[32px] w-16 flex-col items-center justify-center gap-1 rounded-md p-1.5  ${sideChange === 'settings' ? 'bg-sky-900 text-sky-50' : 'text-gray-400 hover:bg-slate-800'}`}
         >
           {/* HeroIcon - Cog-6-tooth */}
           <svg
