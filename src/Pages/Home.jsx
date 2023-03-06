@@ -39,7 +39,7 @@ const Main = ({ ApiKey }) => {
     }
   };
   useEffect(() => {
-    const { id } = localStorage.getItem("userData");
+    const { id } = JSON.parse(localStorage.getItem("userData"));
     isUserDeleted(id);
   }, []);
 
