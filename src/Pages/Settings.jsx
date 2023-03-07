@@ -33,7 +33,6 @@ const Settings = ({ ApiKey }) => {
     );
     const userChek = data.filter(user => user.userName !== localData.userName).filter(u => u.userName === formData.userName)
     const emailChek = data.filter(user => user.email !== localData.email).filter(u => u.email === formData.email)
-    console.log(userChek,emailChek);
     if(userChek.length < 1 && emailChek.length < 1){
       localStorage.setItem(
         "userData",
