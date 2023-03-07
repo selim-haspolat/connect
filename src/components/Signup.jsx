@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 
 const Signup = ({ round, setRound, ApiKey, setLogin }) => {
   const [formData, setFormData] = useState({});
+  const [userSubmit, setUserSubmit] = useState(true);
 
   const postUser = async () => {
     const { fsname, smail, spassword } = formData;
@@ -49,23 +50,26 @@ const Signup = ({ round, setRound, ApiKey, setLogin }) => {
         title: "Kulanici Mevcut",
       });
     } else {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener("mouseenter", Swal.stopTimer);
-          toast.addEventListener("mouseleave", Swal.resumeTimer);
-        },
-      });
-      Toast.fire({
-        icon: "success",
-        title: "Kayit Başarili",
-      });
-      await postUser();
-      await setUser();
+      if (userSubmit) {
+        setUserSubmit(false)
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+          },
+        });
+        Toast.fire({
+          icon: "success",
+          title: "Kayit Başarili",
+        });
+        await postUser();
+        await setUser();
+      }
     }
     event.target.reset();
   };
