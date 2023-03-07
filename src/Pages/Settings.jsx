@@ -13,10 +13,17 @@ const Settings = ({ ApiKey }) => {
   });
 
   const pushChanges = async () => {
+    const {data} =await axios(`https://63f2206c4f17278c9a20b961.mockapi.io/${ApiKey}/${id}`)
+    
+    const updatePosts = data.posts.map(p => ({...p, postCreator: formData.userName,postCreatorImage:formData.profileImage}))
+
+    console.log(updatePosts);
+
     await axios.put(
       `https://63f2206c4f17278c9a20b961.mockapi.io/${ApiKey}/${id}`,
-      formData
+      {...formData, posts:updatePosts}
     );
+
   };
 
   const changeUserData = async (e) => {
@@ -24,9 +31,10 @@ const Settings = ({ ApiKey }) => {
     const { data } = await axios(
       `https://63f2206c4f17278c9a20b961.mockapi.io/${ApiKey}`
     );
-    const userChek = data.filter(u => u.userName === formData.userName)
-    const emailChek = data.filter(u => u.email === formData.email)
-    if(userChek.length !== 1 || emailChek.length !== 1){
+    const userChek = data.filter(user => user.userName !== localData.userName).filter(u => u.userName === formData.userName)
+    const emailChek = data.filter(user => user.email !== localData.email).filter(u => u.email === formData.email)
+    console.log(userChek,emailChek);
+    if(userChek.length < 1 && emailChek.length < 1){
       localStorage.setItem(
         "userData",
         JSON.stringify({ ...localData, ...formData })
